@@ -41,7 +41,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 30px; /* Increased space between images and text */
+            gap: 327px; /* Increased space between images and text */
         }
 
         .header-icon {
@@ -173,6 +173,54 @@
         .youtube-link { color: rgb(255, 0, 0); text-decoration: none; }
         .youtube-link:hover { text-decoration: underline; }
         .youtube-icon { width: 40px; height: auto; vertical-align: middle; margin-right: 5px; }
+
+        /* --- NEW: Responsive Styles for Mobile & Tablet --- */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%; /* Use more of the screen on mobile */
+            }
+
+            .header-container {
+                flex-direction: column; /* Stack header items vertically */
+                gap: 20px; /* Reduce the gap for the new layout */
+            }
+
+            .header-icon {
+                width: 150px; /* Make the icons smaller on mobile */
+            }
+
+            h1 {
+                font-size: 2em; /* Reduce the main title's font size */
+                white-space: normal; /* Allow the title to wrap to a new line */
+            }
+            
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .game-archive h3 {
+                font-size: 1.4em;
+            }
+
+            .release-version h4 {
+                font-size: 1.2em;
+            }
+
+            .download-section {
+                flex-direction: column; /* Stack the download button and "works in" section */
+                align-items: flex-start; /* Align items to the left */
+                gap: 15px; /* Add space between the stacked items */
+            }
+
+            .works-in img {
+                width: 180px; /* Reduce the size of the "Generals" and "Zero Hour" icons */
+                height: auto;
+            }
+
+            .modal-content {
+                width: 90%; /* Make the pop-up modal wider on smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
@@ -351,5 +399,4 @@
         }
     </script>
 </body>
-
 </html>
