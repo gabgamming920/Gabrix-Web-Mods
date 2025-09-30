@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabrix - Mod Releases</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0 0 60px 0; /* Add padding to bottom to avoid footer overlap */
+            position: relative;
+            background-color: #333; /* Fallback background color */
+        }
+
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('open-src-image.png'); 
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            -webkit-filter: blur(8px); /* For older versions of Safari */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        
+        /* --- New Header Style --- */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px; /* Increased space between images and text */
+        }
+
+        .header-icon {
+            width: 327px; /* <-- INCREASED THIS VALUE TO MAKE THE PICS BIG */
+            height: auto;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+            white-space: nowrap; /* <-- ADDED THIS TO MAKE THE H1 WIDER */
+        }
+
+        h2 {
+            margin-top: 40px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8em;
+        }
+
+        /* --- New Archive Styles --- */
+        .game-archive {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+            text-align: left; /* Align text left for readability */
+        }
+
+        .game-archive h3 {
+            font-size: 1.8em;
+            text-align: center;
+            margin-top: 0;
+            border-bottom: 2px solid #555;
+            padding-bottom: 10px;
+        }
+
+        .release-version {
+            padding: 15px;
+            border-top: 1px solid #444;
+        }
+        
+        .release-version:first-of-type {
+            border-top: none; /* No border for the first item */
+        }
+
+        .release-version h4 {
+            font-size: 1.4em;
+            margin: 0 0 10px 0;
+        }
+
+        .release-date {
+            font-size: 0.8em;
+            color: #ccc;
+            font-style: italic;
+        }
+
+        .release-version ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .release-version li {
+            margin-bottom: 5px;
+            font-size: 1em;
+            line-height: 1.4;
+        }
+        
+        /* --- New Download Section Styles --- */
+        .download-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .download-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #5a5a5a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .download-link:hover {
+            background-color: #777;
+        }
+
+        .works-in {
+            display: flex;
+            align-items: center;
+        }
+
+        .works-in span {
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+
+        .works-in img {
+            width: 246px; /* Adjust icon size as needed */
+            height: 78px;
+            margin-left: 4px;
+        }
+
+        /* --- Modal and Other Styles (Unchanged) --- */
+        .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); }
+        .modal-content { background-color: #333; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 700px; border-radius: 8px; }
+        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close:hover, .close:focus { color: #fff; text-decoration: none; }
+        #openModalBtn, #openModalBtn2 { background-color: transparent; border: 1px solid #fff; color: #fff; font-size: 1em; cursor: pointer; padding: 10px 15px; border-radius: 5px; transition: background-color 0.3s, color 0.3s; }
+        #openModalBtn:hover, #openModalBtn2:hover { background-color: #fff; color: #333; }
+        .youtube-link { color: rgb(255, 0, 0); text-decoration: none; }
+        .youtube-link:hover { text-decoration: underline; }
+        .youtube-icon { width: 40px; height: auto; vertical-align: middle; margin-right: 5px; }
+
+        /* --- NEW: Button for page navigation --- */
+        .page-nav-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #5a5a5a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: 1px solid #888;
+        }
+        
+        .page-nav-btn:hover {
+            background-color: #777;
+        }
+
+        /* --- NEW: Responsive Styles for Mobile & Tablet --- */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%; /* Use more of the screen on mobile */
+            }
+
+            .header-container {
+                flex-direction: column; /* Stack header items vertically */
+                gap: 20px; /* Reduce the gap for the new layout */
+            }
+
+            .header-icon {
+                width: 150px; /* Make the icons smaller on mobile */
+            }
+
+            h1 {
+                font-size: 2em; /* Reduce the main title's font size */
+                white-space: normal; /* Allow the title to wrap to a new line */
+            }
+            
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .game-archive h3 {
+                font-size: 1.4em;
+            }
+
+            .release-version h4 {
+                font-size: 1.2em;
+            }
+
+            .download-section {
+                flex-direction: column; /* Stack the download button and "works in" section */
+                align-items: flex-start; /* Align items to the left */
+                gap: 15px; /* Add space between the stacked items */
+            }
+
+            .works-in img {
+                width: 180px; /* Reduce the size of the "Generals" and "Zero Hour" icons */
+                height: auto;
+            }
+
+            .modal-content {
+                width: 90%; /* Make the pop-up modal wider on smaller screens */
+            }
+        }
+		
+		/* --- New Donation Modal Styles --- */
+        .donation-options {
+            list-style: none; /* Removes the default list bullets */
+            padding: 0;
+            display: flex; /* Aligns the QR codes in a row by default */
+            justify-content: space-around; /* Spreads them out evenly */
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .donation-options li {
+            text-align: center; /* Centers the text (e.g., "$5") above the image */
+        }
+
+        .donation-options img {
+            width: 150px; /* Sets a consistent width for the QR codes */
+            height: auto;
+            border: 2px solid #777; /* Optional: adds a border */
+            border-radius: 5px;   /* Optional: rounds the corners */
+        }
+		
+		.donation-options {
+            flex-direction: column; /* Stacks the donation items vertically */
+            gap: 25px; /* Adds space between the stacked items */
+        }
+    </style>
+</head>
+<body>
+    <audio id="backgroundMusic">
+        <source src="DownloadComplete.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="background-blur"></div>
+    <div class="container">
+
+                <h2>Open Source Models</h2>
+                <p>Just Browse:D</p>
+
+
+                <div class="game-archive">
+                    <h3>Vehicles</h3>
+                    
+                    <div class="release-version">
+                        <h4>Helix - Japanese Var <span class=release-date>(Gabrix - September 28, 2025)</span></h4>
+                        <div class="download-section">
+                            <a href="https://github.com/gabgamming920/Releases-Mods/releases/download/version-new/Japanese.Helix.MODEL.AND.TEXTURE.zip" target="_blank"  class="download-link">Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <div class="game-archive">
+                    <h3>Hulks</h3>
+                    <div class="release-version">
+                        <h4>Custom Plane Hulks</h4>
+                        <p>Unavailable at this time. Sorry 😅</p>
+                        <ul>
+                            <li>Go wild</li>
+                            <li>Smoke is unavailable</li>
+                            <li>Adds Realisticity to destroyed planes</li>
+                        </ul>
+                        <div class="download-section">
+                            <a href="#" class="download-link">Unavailable</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW SECTION WITH BUTTON -->
+            <section style="margin-top: 40px; padding-bottom: 20px;">
+                <a href="second-page.html" class="page-nav-btn">Back to Previous Page</a>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2025 Gabrix Sole Developer. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Get the modals
+        var modal = document.getElementById('aboutModal');
+        var modal2 = document.getElementById('aboutModal2');
+
+        // Get the buttons that open the modals
+        var btn = document.getElementById("openModalBtn");
+        var btn2 = document.getElementById("openModalBtn2");
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        btn2.onclick = function() {
+            modal2.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+            if (event.target == modal2) {
+                modal2.style.display = "none";
+            }
+        }
+
+        // Play audio function
+        function playAudio() {
+            var audio = document.getElementById('backgroundMusic');
+            audio.play();
+        }
+            // JavaScript for the snowy effect
+            const canvas = document.getElementById('snowfall');
+        const ctx = canvas.getContext('2d');
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        const snowflakeCount = 250;
+        const snowflakes = [];
+
+        for (let i = 0; i < snowflakeCount; i++) {
+            snowflakes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 3 + 1, // radius between 1 and 4
+                density: Math.random() * snowflakeCount // for individual speed
+            });
+        }
+
+        function drawSnowflakes() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.beginPath();
+            for (let i = 0; i < snowflakes.length; i++) {
+                const flake = snowflakes[i];
+                ctx.moveTo(flake.x, flake.y);
+                ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2, true);
+            }
+            ctx.fill();
+        }
+
+        let angle = 0;
+        function updateSnowflakes() {
+            angle += 0.01;
+            for (let i = 0; i < snowflakes.length; i++) {
+                const flake = snowflakes[i];
+                // Update y position (downward motion)
+                flake.y += Math.pow(flake.density, 2) / 10000 + 1;
+                // Update x position (sideways motion)
+                flake.x += Math.sin(angle + flake.density) * 0.5;
+
+                // If snowflake goes off screen, reset it to the top
+                if (flake.y > canvas.height) {
+                    snowflakes[i] = {
+                        x: Math.random() * canvas.width,
+                        y: 0,
+                        radius: flake.radius,
+                        density: flake.density
+                    };
+                }
+            }
+        }
+
+        function gameLoop() {
+            drawSnowflakes();
+            updateSnowflakes();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
+</body>
+</html>

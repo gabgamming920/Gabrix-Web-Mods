@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabrix - More Projects</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        /* Shared styles for consistency */
+        body {
+            font-family: Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0 0 80px 0; /* Increased padding for footer */
+            position: relative;
+            background-color: #1a1a1a; /* Darker background for snow visibility */
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+
+        /* Canvas for the snow effect */
+        #snowfall {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind content, in front of background */
+            pointer-events: none; /* Allows clicks to go through the canvas */
+        }
+
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* Placed behind the snow canvas */
+            background-image: url('background-image-second.jpg'); 
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin-top: 40px;
+            border-bottom: 2px solid #555;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        
+        .project-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px; /* Space between boxes */
+            margin-top: 30px;
+        }
+
+        /* NEW: Styles for the project links */
+        .project-link {
+            text-decoration: none; /* Removes underline from link text */
+            color: inherit; /* Makes link text use parent's color */
+            display: block; /* Allows the link to have dimensions */
+        }
+
+        .project-box {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 300px;
+            text-align: left;
+            border: 1px solid #444;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box; /* Ensures padding is included in width */
+        }
+
+        /* The hover effect is on the box, but the whole thing is clickable */
+        .project-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .project-box h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #eee;
+        }
+
+        .project-box p {
+            font-size: 1em;
+            line-height: 1.5;
+            color: #ccc;
+        }
+
+        .page-nav-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 25px;
+            background-color: #5a5a5a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: 1px solid #888;
+        }
+        
+        .page-nav-btn:hover {
+            background-color: #777;
+        }
+
+        .footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8em;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2em;
+            }
+            .project-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="snowfall"></canvas>
+
+    <div class="background-blur"></div>
+    <div class="container">
+        <header>
+            <h1>Project Categories</h1>
+            <p>Explore different types of projects and resources.</p>
+        </header>
+        <main>
+            <div class="project-grid">
+                <!-- Each box is now wrapped in an anchor (<a>) tag -->
+                <a href="mods.html" class="project-link">
+                    <div class="project-box">
+                        <h3>Mods</h3>
+                        <p>Custom modifications for games like C&C Generals and Zero Hour. New maps, units, and gameplay mechanics.</p>
+                    </div>
+                </a>
+                <a href="open-src.html" class="project-link">
+                    <div class="project-box">
+                        <h3>Open Source</h3>
+                        <p>Projects with publicly available source code. Feel free to contribute, fork, or use them in your own work.</p>
+                    </div>
+                </a>
+                <a href="util-tools.html" class="project-link">
+                    <div class="project-box">
+                        <h3>Utilities & Tools</h3>
+                        <p>Helpful tools and utilities designed to assist modders and players with game customization and management. Get them now!</p>
+                    </div>
+                </a>
+                <a href="community-mods.html" class="project-link">
+                    <div class="project-box">
+                        <h3>Community Mods</h3>
+                        <p>Moddb Mods. This is here as a shortcut to the Mods</p>
+                    </div>
+                </a>
+            </div>
+            <a href="index.html" class="page-nav-btn">Go Back to Main Page</a>
+        </main>
+    </div>
+     <footer class="footer">
+        <p>&copy; 2025 Gabrix Sole Developer. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript for the snowy effect (unchanged)
+        const canvas = document.getElementById('snowfall');
+        const ctx = canvas.getContext('2d');
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        const snowflakeCount = 250;
+        const snowflakes = [];
+
+        for (let i = 0; i < snowflakeCount; i++) {
+            snowflakes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 3 + 1,
+                density: Math.random() * snowflakeCount
+            });
+        }
+
+        function drawSnowflakes() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.beginPath();
+            for (let i = 0; i < snowflakes.length; i++) {
+                const flake = snowflakes[i];
+                ctx.moveTo(flake.x, flake.y);
+                ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2, true);
+            }
+            ctx.fill();
+        }
+
+        let angle = 0;
+        function updateSnowflakes() {
+            angle += 0.01;
+            for (let i = 0; i < snowflakes.length; i++) {
+                const flake = snowflakes[i];
+                flake.y += Math.pow(flake.density, 2) / 10000 + 1;
+                flake.x += Math.sin(angle + flake.density) * 0.5;
+
+                if (flake.y > canvas.height) {
+                    snowflakes[i] = {
+                        x: Math.random() * canvas.width,
+                        y: 0,
+                        radius: flake.radius,
+                        density: flake.density
+                    };
+                }
+            }
+        }
+
+        function gameLoop() {
+            drawSnowflakes();
+            updateSnowflakes();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
+</body>
+</html>
+
