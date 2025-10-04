@@ -191,6 +191,13 @@
             background-color: #777;
         }
 
+        .page-nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
         /* --- NEW: Responsive Styles for Mobile & Tablet --- */
         @media (max-width: 768px) {
             .container {
@@ -389,9 +396,12 @@
                 </div>
             </section>
 
-            <!-- NEW SECTION WITH BUTTON -->
+            <!-- NEW SECTION WITH BUTTONS -->
             <section style="margin-top: 40px; padding-bottom: 20px;">
-                <a href="second-page.html" class="page-nav-btn">View More Projects</a>
+                <div class="page-nav-container">
+                    <a href="second-page.html" class="page-nav-btn">View More Projects</a>
+                    <a href="https://gabgamming920.github.io/Gabrix-Web-Mods-RA2/" class="page-nav-btn" target="_blank">RA2 Themed Website</a>
+                </div>
             </section>
         </main>
     </div>
