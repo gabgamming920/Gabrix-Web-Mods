@@ -25,6 +25,7 @@ function endIntroSequence() {
     videoContainer.style.display = 'none';
     skipMessage.style.display = 'none';
     mainContent.style.display = 'block';
+    playAudio(); // Start playing background music
 }
 
 // Click event to start the intro
@@ -73,11 +74,21 @@ window.onclick = function(event) {
     }
 }
 
-// Play audio function
+// Plays the shitty nostalgic cs nexon, v6, v7, online, background audio function
 function playAudio() {
     var audio = document.getElementById('backgroundMusic');
+    audio.volume = 0.47;  // Set the fucking volume to 47%
+    audio.loop = true;    // Enable the fucking looping
     audio.play();
 }
+
+// Plays the fucking download audio function
+function playdownloadAudio() {
+    var audio = document.getElementById('downloadMusic');
+    audio.volume = 0.47;  // Set volume to 47%
+    audio.play();
+}
+
 
 // JavaScript for the snowy effect
 const canvas = document.getElementById('snowfall');

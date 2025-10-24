@@ -73,12 +73,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 60px;
 }
 
 .header-icon {
     width: 327px;
     height: auto;
+}
+
+.header-title {
+	width: 597px;
+	height: auto;
+	align-items: center;
+	justify-content: center;
 }
 
 h1 {
