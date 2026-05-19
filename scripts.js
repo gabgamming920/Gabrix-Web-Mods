@@ -12,6 +12,7 @@ mainContent.style.display = 'none';
 function startIntroSequence() {
     introOverlay.style.display = 'none';
     videoContainer.style.display = 'block';
+    introVideo.audio = 0.20; // CHANGED THE VOLUME! INTRO WAS TOO FUCKING LOUD!
     introVideo.play();
     
     // Show skip message after 1.5 seconds
