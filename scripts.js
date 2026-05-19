@@ -150,5 +150,3 @@ function gameLoop() {
     updateSnowflakes();
     requestAnimationFrame(gameLoop);
 }
-
-gameLoop();
